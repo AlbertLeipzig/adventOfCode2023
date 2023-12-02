@@ -15,6 +15,12 @@ const replaceStringByNumber = (string) => {
   return stringNumbers.indexOf(string) + 1;
 };
 
+export const findStringValue = (string) => {
+  const firstInt = string.charAt(0);
+  const lastInt = string.charAt(string.length - 1);
+  return `${firstInt}${lastInt}`;
+};
+
 export const findHiddenNumbers = (string) => {
   let substrings = [];
 
@@ -41,12 +47,21 @@ export const findHiddenNumbers = (string) => {
     }
   }
 
-  return substrings.join('');
+  const stringValue = findStringValue(substrings.join(''));
+
+  return stringValue;
 };
 
 export const getTotalStringsArrayValue = (stringsArray) => {
-  
-}
+  return stringsArray
+    .map((string) => parseInt(findHiddenNumbers(string)))
+    .reduce((total, current) => {
+      if (!isNaN(current)) {
+        return current + total;
+      }
+      return total;
+    }, 0);
+};
 
 const inputValue = lines[225];
 const expectedOutput = '91499415';
@@ -54,5 +69,5 @@ const expectedOutput = '91499415';
 export const d1 = () => {
   console.log('input value: ', inputValue);
   console.log('expected output : ', expectedOutput);
-  return findHiddenNumbers(inputValue);
+  return getTotalStringsArrayValue(lines);
 };
