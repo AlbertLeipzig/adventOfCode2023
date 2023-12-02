@@ -1,4 +1,5 @@
 import { lines } from './lines.js';
+import * as util from './d_1.js';
 const numbers = [
   'one',
   'two',
@@ -10,7 +11,10 @@ const numbers = [
   'eight',
   'nine',
 ];
-const findSingleHiddenNumber = (string) => {
+
+
+
+export const findSingleHiddenNumber = (string) => {
   let substrings = [];
 
   for (let i = 0; i < string.length; i++) {
@@ -31,9 +35,8 @@ const findSingleHiddenNumber = (string) => {
 
   return hiddenNumber;
 };
-
-const replaceStringWithinString = (string, substr) => {
-  let singleNumber = findSingleHiddenNumber(string);
+export const replaceStringWithinString = (string, substr) => {
+  let singleNumber = util.findSingleHiddenNumber(string);
 
   let substrings = [];
   if (!singleNumber) {
@@ -61,7 +64,7 @@ const replaceStringWithinString = (string, substr) => {
   return cleanString;
 };
 
-const findAllHiddenNumbers = (string) => {
+export const findAllHiddenNumbers = (string) => {
   /* const replacedString = replaceStringWithinString(string); */
   /* console.log(replacedString); */
   const replacedString = replaceStringWithinString(string, []);
@@ -69,7 +72,7 @@ const findAllHiddenNumbers = (string) => {
   return replacedString;
 };
 
-const findNumber = (characters) => {
+export const findNumber = (characters) => {
   let number;
   characters
     .map((char) => parseInt(char))
@@ -85,7 +88,7 @@ const findNumber = (characters) => {
   return number;
 };
 
-const extractDigitsFromString = (string) => {
+export const extractDigitsFromString = (string) => {
   const characters = findAllHiddenNumbers(string).split('');
 
   const firstNumber = findNumber(characters);
@@ -94,14 +97,15 @@ const extractDigitsFromString = (string) => {
   return number;
 };
 
-const calculateSetOfStringsValue = (strings) => {
+export const calculateSetOfStringsValue = (strings) => {
   return strings.reduce(
-    (total, line) => extractDigitsFromString(line) + total,
+    (total, line) => extractDigitsFromString(line, []) + total,
     0
   );
 };
-
 export const d1 = () => {
-  /* return calculateSetOfStringsValue(lines); */
-  return replaceStringWithinString('449three45three', []);
+  return test(lines[225]);
 };
+
+export const test = (value) => value
+
