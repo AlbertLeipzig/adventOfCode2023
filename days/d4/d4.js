@@ -8,7 +8,9 @@ const filterMatchingValues = (card) => {
     }
   });
 
-  return prizeNums.length < 1 ? 0 : Math.pow(2, prizeNums.length);
+  const value = prizeNums.length === 0 ? 0 : Math.pow(2, prizeNums.length - 1);
+
+  return value;
 };
 
 const getTotalCardsValue = (allCardsArray) => {
@@ -17,7 +19,7 @@ const getTotalCardsValue = (allCardsArray) => {
     .reduce((total, current) => total + current, 0);
 };
 
-// this result seems to be too high
+// this result seems to be too low
 
 export const d4 = () => {
   return getTotalCardsValue(cards);
