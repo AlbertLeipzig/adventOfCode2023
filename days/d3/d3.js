@@ -2,55 +2,39 @@ import { schematic } from './input.js';
 
 // transform every line to an array of objects { type : number (single digit) | symbol (*) | space (a), possition [line, index] }
 
-// check every number
-// if character type === "number" character.possition[y (+/-) 1, x (+/-)1].type === symbol, then it's valid
+const symbols = ['+', '-', '*', '/', '$', '%', '@', '#'];
 
-// every validNumber must check then if character.possition[y ===, x(+/-)1].type === "number".
-
-//Every true must be added in the rigth possition
-
-// add all numbers
-
-// the rightNumberArray must be reduced()
-
-const charactersMap = schematic.map((line, i) =>
+const charactersArray = schematic.map((line, i) =>
   line.split('').map((char, j) => {
     char.trim();
-    if (
-      char === '0' ||
-      char === '1' ||
-      char === '2' ||
-      char === '3' ||
-      char === '4' ||
-      char === '5' ||
-      char === '6' ||
-      char === '7' ||
-      char === '8' ||
-      char === '9'
-    ) {
-      return { type: 0, possition: [i, j] };
-    } else if (
-      char === '*' ||
-      char === '+' ||
-      char === '$' ||
-      char === '-' ||
-      char === '*' ||
-      char === '/' ||
-      char === '@' ||
-      char === '#' ||
-      char === '%'
-    ) {
+    if (!isNaN(parseInt(char))) {
+      return { type: 'number', possition: [i, j], value: parseInt(char) };
+    } else if (symbols.includes(char)) {
       return { type: '*', possition: [i, j] };
     } else if (char === '.') {
       return { type: 'a', possition: [i, j] };
-    } else {
-      return 'X';
     }
   })
 );
-const value = charactersMap;
 
-/*  */
+const filterSingleNumber = (int) => {
+  charactersArray.flat().filter((char) => {
+    if (
+      int.possition[1] === char.possition[1] + 1 ||
+      int.possition[1] === char.possition[1] - 1 ||
+      int.possition[0] === char.possition[0] + 1 ||
+      int.possition[0] === char.possition[0] + 1
+    ) {
+      return int;
+    }
+  });
+};
+
+const validNumbers = charactersArray.flat().filter((char) => {
+  filterSingleNumber(char);
+});
+
 export const d3 = () => {
-  return value;
+  /* return {charactersArray}; */
+  return charactersArray;
 };
