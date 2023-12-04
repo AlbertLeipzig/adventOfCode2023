@@ -17,7 +17,7 @@ const charactersArray = schematic.map((line, i) =>
   })
 );
 
-const filterSingleNumber = (int) => {
+/* const filterSingleNumber = (int) => {
   charactersArray.flat().filter((char) => {
     if (
       int.possition[1] === char.possition[1] + 1 ||
@@ -28,13 +28,13 @@ const filterSingleNumber = (int) => {
       return int;
     }
   });
-};
+}; */
 
-const validNumbers = charactersArray.flat().filter((char) => {
+/* const validNumbers = charactersArray.flat().filter((char) => {
   filterSingleNumber(char);
-});
+}); */
 
 export const d3 = () => {
   /* return {charactersArray}; */
-  return charactersArray;
+  /* return charactersArray; */
 };
